@@ -1,22 +1,23 @@
 function solution(N, stages) {
-    const challenger = new Array(N + 2).fill(0);
+    // 스테이지에 도달한 플레이어 수
+    const players = new Array(N + 2).fill(0);
     for (const stage of stages) {
-        challenger[stage] += 1;
+        players[stage] += 1;
     }
     
-    const fails = {};
     let total = stages.length;
-    
-    for (let i = 0; i <= N; i++) {
-        if (challenger[i] === 0) {
-            fails[i] = 0;
-            continue;
+    const fails = []; // 실패율 배열
+    for (let i = 1; i <= N; i++) {
+        if (players[i] === 0) {
+            fails.push([i, 0])
         }
-        
-        fails[i] = challenger[i] / total;
-        total -= challenger[i];
+        else {
+            fails.push([i, players[i] / total]);
+            total -= players[i];
+        }
     }
     
-    const result = Object.entries(fails).sort((a,b) => b[1] - a[1]);
-    return result.map((v) => Number(v[0])).filter(v => v);
+    return fails
+        .sort((a, b) => b[1] - a[1])
+        .map(([stage, _]) => stage);
 }
