@@ -1,3 +1,7 @@
+/*
+  정렬이 핵심!
+*/
+
 // Best
 function solution(strings, n) {
   return strings.sort((a, b) => {
