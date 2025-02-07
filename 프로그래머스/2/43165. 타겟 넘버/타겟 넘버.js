@@ -2,8 +2,11 @@ function solution(numbers, target) {
     let count = 0;
 
     function dfs(index, sum) {
+        // 모든 숫자를 다 사용했을 때만 결과를 비교해야 함
         if (index === numbers.length) {
-            if (sum === target) count++;
+            if (sum === target) {
+                count++;
+            }
             return;
         }
 
